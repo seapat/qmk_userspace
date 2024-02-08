@@ -2,7 +2,7 @@
 
 This is a template repository which allows for an external set of QMK keymaps to be defined and compiled. This is useful for users who want to maintain their own keymaps without having to fork the main QMK repository.
 
-## Howto configure your build targets
+## How to configure your build targets
 
 1. Run the normal `qmk setup` procedure if you haven't already done so -- see [QMK Docs](https://docs.qmk.fm/#/newbs) for details.
 1. Fork this repository
@@ -18,7 +18,7 @@ This is a template repository which allows for an external set of QMK keymaps to
     * Listing the build targets can be done with with `qmk userspace-list`
 1. Commit your changes
 
-## Howto build with GitHub
+## How to build with GitHub
 
 1. In the GitHub Actions tab, enable workflows
 1. Push your changes above to your forked GitHub repository
@@ -26,7 +26,7 @@ This is a template repository which allows for an external set of QMK keymaps to
 1. Wait for the actions run to complete
 1. Inspect the Releases tab on your repository for the latest firmware build
 
-## Howto build locally
+## How to build locally
 
 1. Run the normal `qmk setup` procedure if you haven't already done so -- see [QMK Docs](https://docs.qmk.fm/#/newbs) for details.
 1. Fork this repository
