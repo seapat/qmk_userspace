@@ -1,6 +1,8 @@
 #include QMK_KEYBOARD_H
-#include "oled.c"
 #include "layers.h"
+
+#include "oled.c"
+#include "encoder.c"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // clang-format off
@@ -48,8 +50,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_EXT] = LAYOUT(
         KC_F1,     KC_F2,      KC_F3,      KC_F4,      KC_F5,       KC_F6,                       KC_F7,   KC_F8,    KC_F9,   KC_F10,  KC_F11,   KC_F12,
     LSFT(KC_TAB),  KC_WDEL,    KC_WPRV,    KC_UP,      KC_WNXT,     KC_WBSPC,                    _______, KC_F7,    KC_F8,   KC_F9,   KC_F10,   _______,
-        KC_PGUP,   _______,    KC_LEFT,    KC_DOWN,    KC_RIGHT,    KC_HOME,                     _______, KC_F4,    KC_F5,   KC_F6,   KC_F11,   _______,
-        KC_PGDN,   KC_LCTL,    KC_MPRV,    KC_MPLY,    KC_MNXT,     KC_END,  _______,  _______,  _______, KC_F1,    KC_F2,   KC_F3,   KC_F12,   _______,
+        KC_LALT,   KC_PGUP,    KC_LEFT,    KC_DOWN,    KC_RIGHT,    KC_HOME,                     KC_PGUP, KC_F4,    KC_F5,   KC_F6,   KC_F11,   _______,
+        _______,   KC_PGDN,    KC_MPRV,    KC_MPLY,    KC_MNXT,     KC_END,  _______,  _______,  KC_PGDN, KC_F1,    KC_F2,   KC_F3,   KC_F12,   _______,
                                _______,    _______,    _______,     _______, _______,  _______,  _______, _______,  _______, _______
     ),
 
@@ -62,30 +64,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
     // clang-format on
 };
-
-// Note that the key to be sent for counter-clockwise rotation (CCW) goes first and then the key for clockwise (CW) within ENCODER_CCW_CW.
-#ifdef ENCODER_MAP_ENABLE
-// clang-format off
-
-// Base layer encoder mappings:
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    // Base layers
-    //                volume up/down                    media prev/next
-    [_QWERTY] =     { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN),  },
-    // pass trough
-    [_COLEMAK_DH] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    [_GAME_BASE] =  { ENCODER_CCW_CW(KC_TRNS, KC_TRNS), ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
-    // same as _EXT
-    [_GAME_SWAP] =  { ENCODER_CCW_CW(KC_UNDO, KC_REDO), ENCODER_CCW_CW(KC_WPRV, KC_WNXT) },
-    //                mouse wheel up (CCW)/down (CW)    mouse wheel left/right
-    [_SYMB] =       { ENCODER_CCW_CW(KC_MPRV, KC_MNXT), ENCODER_CCW_CW(KC_WH_L, KC_WH_R) },
-    //                Undo / Redo                       Previous Word / Next Word
-    [_EXT] =        { ENCODER_CCW_CW(KC_UNDO, KC_REDO), ENCODER_CCW_CW(KC_WPRV, KC_WNXT) },
-    [_ADJUST] =     { ENCODER_CCW_CW(KC_UNDO, KC_REDO), ENCODER_CCW_CW(KC_WPRV, KC_WNXT) }
-    // clang-format on
-};
-
-#endif
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     // NOTE: we cant have the same destination layer multiple times (e.g. 2 paths to _ADJUST)
@@ -241,3 +219,4 @@ bool combo_should_trigger(uint16_t combo_index, combo_t *combo, uint16_t keycode
     return true;
 }
 #endif
+
