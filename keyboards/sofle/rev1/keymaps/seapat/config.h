@@ -26,11 +26,11 @@ for more options.
 // #    define SPLIT_OLED_ENABLE  // Synx on/off OLED state between halves (+100).
 #endif
 
-// Encoder settings
-// #ifdef ENCODER_ENABLE
-// #    undef  ENCODER_RESOLUTION
-// #    define ENCODER_RESOLUTION 4
-// #endif
+// Encoder settings, overwrite sensitivity to avoid doubled activations
+#ifdef ENCODER_ENABLE
+#    undef  ENCODER_RESOLUTION
+#    define ENCODER_RESOLUTION 4
+#endif
 #ifdef ENCODER_MAP_ENABLE
 // Key delay for encoders (necessary for some keycodes)
 #    define ENCODER_MAP_KEY_DELAY 10
